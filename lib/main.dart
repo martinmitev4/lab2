@@ -10,7 +10,6 @@ import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-// Global notifications plugin instance
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 Future<void> initializeLocalNotifications() async {
@@ -19,42 +18,31 @@ Future<void> initializeLocalNotifications() async {
     android: androidInitializationSettings,
   );
 
-  // Initialize the plugin
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 }
 
 Future<void> getFCMToken() async {
-  // Get the FCM token
   String? token = await FirebaseMessaging.instance.getToken();
 
-  // Print the token (you can use it for debugging or send it to your server)
   print('FCM Token: $token');
-
-  // You can store the token in a secure location if needed
 }
 
-// Handle background notifications
 Future<void> backgroundHandler(RemoteMessage message) async {
   print("Background message: ${message.messageId}");
 }
 
 void main() async {
-  // Ensure Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Initialize local notifications after Firebase setup
   await initializeLocalNotifications();
 
   await getFCMToken();
-  // Configure background message handler for Firebase messaging
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
 
-  // Run the application
   runApp(
     ChangeNotifierProvider(
       create: (context) => JokesProvider(),
