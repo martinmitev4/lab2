@@ -5,7 +5,7 @@ class Joke {
   String punchline;
 
   Joke({required this.id, required this.type,
-    required this.setup, required this.punchline});
+    required this.setup, required this.punchline,});
 
   factory Joke.fromJson(Map<String, dynamic> json) {
     return Joke(

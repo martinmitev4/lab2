@@ -46,6 +46,12 @@ class _HomeState extends State<Home> {
             },
             child: const Text("Random Joke", style: TextStyle(color: Colors.lime, fontSize: 16),),
           ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/favourites-jokes');
+            },
+            child: const Text("Favourites", style: TextStyle(color: Colors.lime, fontSize: 16),),
+          ),
         ],
       ),
       body: jokesTypes.isEmpty ?
